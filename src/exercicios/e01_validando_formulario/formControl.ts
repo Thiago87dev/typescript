@@ -2,21 +2,25 @@ import isEmail from 'validator/lib/isEmail'
 
 const SHOW_ERROR_MESSAGE = 'show-error-message'
 
-const form = document.querySelector('.form') as HTMLFormElement
-const userName = document.querySelector('.username') as HTMLInputElement
-const email = document.querySelector('.email') as HTMLInputElement
-const password = document.querySelector('.password') as HTMLInputElement
-const password2 = document.querySelector('.password2') as HTMLInputElement
+const form = document.querySelector('.form') as HTMLFormElement | null
+const userName = document.querySelector('.username') as HTMLInputElement | null
+const email = document.querySelector('.email') as HTMLInputElement | null
+const password = document.querySelector('.password') as HTMLInputElement | null
+const password2 = document.querySelector(
+  '.password2',
+) as HTMLInputElement | null
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault()
-  hideErrorMessage(form)
-  checkEmptyFields(userName, email, password, password2)
-  checkEmail(email)
-  checkEqualPasswords(password, password2)
-  if (shouldSendFrom(form))
-    /* form.submit() */ console.log('Formulario enviado')
-})
+if (form && userName && email && password && password2) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    hideErrorMessage(form)
+    checkEmptyFields(userName, email, password, password2)
+    checkEmail(email)
+    checkEqualPasswords(password, password2)
+    if (shouldSendFrom(form))
+      /* form.submit() */ console.log('Formulario enviado')
+  })
+}
 
 function checkEmptyFields(...inputs: HTMLInputElement[]): void {
   inputs.forEach((input) => {
