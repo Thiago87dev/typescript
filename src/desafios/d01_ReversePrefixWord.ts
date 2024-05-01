@@ -13,4 +13,4 @@ function reversePrefix(word: string, ch: string): string {
   return invertida + segundaParte
 }
 
-console.log(reversePrefix('palavra', 's'))
+console.log(reversePrefix('palavra', 'v'))
